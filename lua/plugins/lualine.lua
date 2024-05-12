@@ -4,7 +4,7 @@ return { -- Collection of various small independent plugins/modules
     -- You can optionally lazy-load heirline on UIEnter
     event = 'UIEnter',
     config = function()
-      require 'lua.plugins.minim'
+      require 'lua.minim'
     end,
   },
 }
