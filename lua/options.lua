@@ -5,6 +5,8 @@ vim.cmd [[
 
 vim.cmd [[set undodir=~/.cache/vim/undodir]]
 
+vim.opt.inccommand = 'split'
+
 -- Settings
 vim.opt.nu = true
 vim.opt.relativenumber = true
@@ -31,6 +33,6 @@ vim.opt.spell = true
 
 -- Neovide
 if vim.g.neovide then
-    vim.o.guifont = 'JetBrains Mono Nerd Font:h14'
-    vim.g.neovide_cursor_vfx_mode = 'railgun'
+  vim.o.guifont = 'JetBrains Mono Nerd Font:h14'
+  vim.g.neovide_cursor_vfx_mode = 'railgun'
 end
