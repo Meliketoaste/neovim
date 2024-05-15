@@ -9,8 +9,9 @@ return {
       { '<leader>ff', '<cmd>Telescope find_files<cr>', desc = 'Find Files' },
       { '<leader>fr', '<cmd>Telescope oldfiles<cr>', desc = 'Recent Files' },
       { '<leader>ft', '<cmd>Telescope live_grep<cr>', desc = 'Search Text in Files' },
-      { '<leader>bi', '<cmd>Telescope buffers<cr>', desc = 'List Buffers' },
+      { '<leader>b', '<cmd>Telescope buffers<cr>', desc = 'List Buffers' },
       { '<M-x>', '<cmd>Telescope commands<cr>', desc = 'Run Command' },
+      { '<leader>fo', '<cmd>Telescope file_browser<cr>', desc = 'file_browser' },
     },
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
@@ -74,6 +75,17 @@ return {
         --        },
         --    },
         --},
+        extensions = {
+          fzf = {
+            fuzzy = true,
+            override_generic_sorter = true,
+            override_file_sorter = true,
+            case_mode = 'smart_case',
+          },
+          file_browser = {
+            theme = 'ivy',
+          },
+        },
       }
       pcall(require('telescope').load_extension, 'fzf')
 
@@ -204,5 +216,11 @@ return {
       { '<leader>fm', '<cmd>Telescope manix<cr>', desc = 'Search Nix Options and Utils' },
     },
     -- ...
+  },
+  {
+    'nvim-telescope/telescope-file-browser.nvim',
+    config = function()
+      require('telescope').load_extension 'file_browser'
+    end,
   },
 }
