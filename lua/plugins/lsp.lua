@@ -119,6 +119,18 @@ return {
     local opts = { silent = true }
     vim.keymap.set('n', '<leader>cp', require('crates').show_popup, opts)
 
+    vim.api.nvim_set_hl(0, 'CmpNormal', { bg = '#1e1e2e' })
+    vim.api.nvim_set_hl(0, 'CmpBg', { bg = '#31324a' })
+
+    --local colors = require('catppuccin.palettes').get_palette()
+    --require('modes').setup {
+    --  colors = {
+    --    copy = colors.peach,
+    --    delete = colors.red,
+    --    insert = colors.blue,
+    --    visual = colors.lavender,
+    --  },
+
     cmp.setup {
       mapping = {
         ['<Tab>'] = cmp_action.luasnip_supertab(),
@@ -126,20 +138,29 @@ return {
       },
       window = {
         completion = {
-          winhighlight = 'Normal:Pmenu,FloatBorder:Pmenu,Search:None',
+          border = 'none', -- single|rounded|none
+          -- custom colors
+          --winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:CursorLineBG,Search:None", -- BorderBG|FloatBorder
+          --side_padding = settings.cmp_style == "default" and 1 or 0, -- padding at sides
+          --col_offset = settings.cmp_style == "default" and -1 or -4, -- move floating box left or right
+
+          winhighlight = 'Normal:CmpNormal,FloatBorder:Pmenu,Search:None,CursorLine:CmpBg',
           col_offset = -3,
           side_padding = 0,
         },
+
+        documentation = {
+          border = 'none', -- single|rounded|none
+          -- custom colors
+          winhighlight = 'Normal:CmpNormal,FloatBorder:FloatBorder,CursorLine:CursorLineBG,Search:None', -- BorderBG|FloatBorder
+          side_padding = 2, -- * NOT WORKING
+        },
       },
       formatting = {
-        fields = { 'kind', 'abbr', 'menu' },
-        format = function(entry, vim_item)
-          local kind = require('lspkind').cmp_format { mode = 'symbol_text', maxwidth = 50 }(entry, vim_item)
-          local strings = vim.split(kind.kind, '%s', { trimempty = true })
-          kind.kind = ' ' .. (strings[1] or '') .. ' '
-          kind.menu = '    (' .. (strings[2] or '') .. ')'
 
-          return kind
+        --fields = { 'kind', 'abbr', 'menu' },
+        format = function(...)
+          return require('lspkind').cmp_format { with_text = true }(...)
         end,
       },
     }
