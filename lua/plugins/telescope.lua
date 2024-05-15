@@ -8,12 +8,22 @@ return {
     keys = {
       { '<leader>ff', '<cmd>Telescope find_files<cr>', desc = 'Find Files' },
       { '<leader>fr', '<cmd>Telescope oldfiles<cr>', desc = 'Recent Files' },
-      { '<leader>ft', '<cmd>Telescope live_grep<cr>', desc = 'Search Text in Files' },
+      { '<leader>fe', '<cmd>Telescope frecency<cr>', desc = 'Frecency files' },
+      { '<leader>fg', '<cmd>Telescope live_grep<cr>', desc = 'Search Text in Files' },
       { '<leader>b', '<cmd>Telescope buffers<cr>', desc = 'List Buffers' },
       { '<M-x>', '<cmd>Telescope commands<cr>', desc = 'Run Command' },
       { '<leader>fo', '<cmd>Telescope file_browser<cr>', desc = 'file_browser' },
+      {
+        '<leader>z',
+        function()
+          require('telescope').extensions.zoxide.list {
+            layout_config = { width = 0.5, height = 0.6 },
+          }
+        end,
+        desc = 'Zoxide (MRU)',
+      },
     },
-    dependencies = { 'nvim-lua/plenary.nvim' },
+    dependencies = { 'nvim-lua/plenary.nvim', 'jvgrootveld/telescope-zoxide' },
     config = function()
       require('telescope').setup {
         defaults = {
@@ -76,6 +86,19 @@ return {
         --    },
         --},
         extensions = {
+          zoxide = {
+            prompt_title = '[ Zoxide directories ]',
+            mappings = {
+              default = {
+                action = function(selection)
+                  vim.cmd.tcd(selection.path)
+                end,
+                after_action = function(selection)
+                  vim.notify("Current working directory set to '" .. selection.path .. "'", vim.log.levels.INFO)
+                end,
+              },
+            },
+          },
           fzf = {
             fuzzy = true,
             override_generic_sorter = true,
