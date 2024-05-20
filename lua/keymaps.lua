@@ -11,6 +11,8 @@ vim.keymap.set('n', '<leader><Tab>', '<cmd>bnext<cr>')
 
 vim.keymap.set('n', '<leader>rp', ':%s/\\<<C-r><C-w>\\>//gI<Left><Left><Left>') -- Replace all instance of current word in file
 
+--vim.keyap.set('n', 'gl', '<c-^>')
+
 -- Unset arrow keys
 vim.cmd [[
     noremap <Left> <Nop>
@@ -23,9 +25,4 @@ vim.cmd [[
     inoremap <Right> <Nop>
     inoremap <Up> <Nop>
     inoremap <Down> <Nop>
-]]
-
--- Disable Mouse
-vim.cmd [[
-    set mouse=
 ]]
