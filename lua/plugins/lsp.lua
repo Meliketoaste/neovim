@@ -97,12 +97,12 @@ return {
       },
     }
 
-    lsp.on_attach(function(client, _)
-      require('lsp-format').on_attach(client)
-      vim.keymap.set('n', '<space>ca', function()
-        vim.lsp.buf.code_action { apply = true }
-      end, bufopts)
-    end)
+    --lsp.on_attach(function(client, _)
+    --  require('lsp-format').on_attach(client)
+    --  vim.keymap.set('n', '<space>ca', function()
+    --    vim.lsp.buf.code_action { apply = true }
+    --  end, bufopts)
+    --end)
     lsp.setup()
 
     local cmp = require 'cmp'
@@ -157,11 +157,18 @@ return {
         },
       },
       formatting = {
-
-        --fields = { 'kind', 'abbr', 'menu' },
-        format = function(...)
-          return require('lspkind').cmp_format { with_text = true }(...)
-        end,
+        format = lspkind.cmp_format {
+          mode = 'symbol_text',
+          menu = {
+            nvim_lsp = '[LSP]',
+            ultisnips = '[US]',
+            nvim_lua = '[Lua]',
+            path = '[Path]',
+            buffer = '[Buffer]',
+            emoji = '[Emoji]',
+            omni = '[Omni]',
+          },
+        },
       },
     }
 
