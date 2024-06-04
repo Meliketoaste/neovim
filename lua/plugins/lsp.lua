@@ -156,20 +156,20 @@ return {
           side_padding = 2, -- * NOT WORKING
         },
       },
-      formatting = {
-        format = lspkind.cmp_format {
-          mode = 'symbol_text',
-          menu = {
-            nvim_lsp = '[LSP]',
-            ultisnips = '[US]',
-            nvim_lua = '[Lua]',
-            path = '[Path]',
-            buffer = '[Buffer]',
-            emoji = '[Emoji]',
-            omni = '[Omni]',
-          },
-        },
-      },
+      --formatting = {
+      --  --format = lspkind.cmp_format {
+      --  --  mode = 'symbol_text',
+      --  --  menu = {
+      --  --    nvim_lsp = '[LSP]',
+      --  --    ultisnips = '[US]',
+      --  --    nvim_lua = '[Lua]',
+      --  --    path = '[Path]',
+      --  --    buffer = '[Buffer]',
+      --  --    emoji = '[Emoji]',
+      --  --    omni = '[Omni]',
+      --  --  },
+      --  --},
+      --},
     }
 
     vim.opt.signcolumn = 'yes' -- Disable lsp signals shifting buffer
