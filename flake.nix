@@ -40,7 +40,7 @@
             wrapperArgs =
               [ "--prefix" "PATH" ":" "${lib.makeBinPath runtimeDeps}"
                 ];
-            extraWrapperArgs = [ '' --prefix LD_LIBRARY_PATH : "${pkgs.lib.makeLibraryPath [ pkgs.libgit2 ]}"''];
+            extraWrapperArgs =  ''--prefix LD_LIBRARY_PATH : "${pkgs.lib.makeLibraryPath [ pkgs.libgit2 ]}"'';
               
           });
       in {
