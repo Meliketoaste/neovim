@@ -228,6 +228,13 @@ return {
     end,
   },
   {
+    'crispgm/telescope-heading.nvim',
+    config = function()
+      require('telescope').load_extension 'heading'
+    end,
+  },
+
+  {
     'nvim-telescope/telescope-frecency.nvim',
     config = function()
       require('telescope').load_extension 'frecency'

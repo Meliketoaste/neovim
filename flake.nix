@@ -17,6 +17,7 @@
 
           # LSP/Linters
           nil
+          nix-ld
           statix
           deadnix
           manix
@@ -37,7 +38,10 @@
             '';
           } // {
             wrapperArgs =
-              [ "--prefix" "PATH" ":" "${lib.makeBinPath runtimeDeps}" ];
+              [ "--prefix" "PATH" ":" "${lib.makeBinPath runtimeDeps}"
+                ];
+            extraWrapperArgs = [ '' --prefix LD_LIBRARY_PATH : "${pkgs.lib.makeLibraryPath [ pkgs.libgit2 ]}"''];
+              
           });
       in {
         overlays = {
