@@ -14,15 +14,15 @@ vim.keymap.set('n', '<leader>rp', ':%s/\\<<C-r><C-w>\\>//gI<Left><Left><Left>') 
 --vim.keyap.set('n', 'gl', '<c-^>')
 
 -- Unset arrow keys
-vim.cmd [[
-    noremap <Left> <Nop>
-    noremap <Right> <Nop>
-    noremap <Up> <Nop>
-    noremap <Down> <Nop>
-
-
-    inoremap <Left> <Nop>
-    inoremap <Right> <Nop>
-    inoremap <Up> <Nop>
-    inoremap <Down> <Nop>
-]]
+--vim.cmd [[
+--    noremap <Left> <Nop>
+--    noremap <Right> <Nop>
+--    noremap <Up> <Nop>
+--    noremap <Down> <Nop>
+--
+--
+--    inoremap <Left> <Nop>
+--    inoremap <Right> <Nop>
+--    inoremap <Up> <Nop>
+--    inoremap <Down> <Nop>
+--]]

@@ -81,6 +81,7 @@ return {
       --'typst-lsp',
       'ols',
       'julials',
+      'markdown',
     }
 
     require('lspconfig').nil_ls.setup {
@@ -130,6 +131,8 @@ return {
     --    insert = colors.blue,
     --    visual = colors.lavender,
     --  },
+    local lspkind = require 'lspkind'
+    lspkind.init {}
 
     cmp.setup {
       mapping = {
@@ -145,7 +148,7 @@ return {
           --col_offset = settings.cmp_style == "default" and -1 or -4, -- move floating box left or right
 
           winhighlight = 'Normal:CmpNormal,FloatBorder:Pmenu,Search:None,CursorLine:CmpBg',
-          col_offset = -3,
+          col_offset = 1,
           side_padding = 0,
         },
 
@@ -156,20 +159,23 @@ return {
           side_padding = 2, -- * NOT WORKING
         },
       },
-      --formatting = {
-      --  --format = lspkind.cmp_format {
-      --  --  mode = 'symbol_text',
-      --  --  menu = {
-      --  --    nvim_lsp = '[LSP]',
-      --  --    ultisnips = '[US]',
-      --  --    nvim_lua = '[Lua]',
-      --  --    path = '[Path]',
-      --  --    buffer = '[Buffer]',
-      --  --    emoji = '[Emoji]',
-      --  --    omni = '[Omni]',
-      --  --  },
-      --  --},
-      --},
+      formatting = {
+        format = lspkind.cmp_format {
+          mode = 'symbol_text',
+          menu = {
+            nvim_lsp = '',
+            ultisnips = '[US]',
+            nvim_lua = '[Lua]',
+            path = '[Path]',
+            buffer = '[Buffer]',
+            emoji = '[Emoji]',
+            omni = '[Omni]',
+          },
+        },
+      },
+      experimental = {
+        ghost_text = true,
+      },
     }
 
     vim.opt.signcolumn = 'yes' -- Disable lsp signals shifting buffer
