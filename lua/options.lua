@@ -30,6 +30,7 @@ vim.opt.updatetime = 50
 vim.opt.clipboard = 'unnamedplus'
 vim.opt.spelllang = 'en_us'
 vim.opt.spell = true
+vim.o.conceallevel = 2
 
 -- Neovide
 if vim.g.neovide then

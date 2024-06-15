@@ -12,7 +12,8 @@ return {
       { '<leader>fg', '<cmd>Telescope live_grep<cr>', desc = 'Search Text in Files' },
       { '<leader>b', '<cmd>Telescope buffers<cr>', desc = 'List Buffers' },
       { '<M-x>', '<cmd>Telescope commands<cr>', desc = 'Run Command' },
-      { '<leader>fo', '<cmd>Telescope file_browser<cr>', desc = 'file_browser' },
+      --{ '<leader>fof', '<cmd><cr>', desc = 'ObsidianSearch' },
+      -- <leader FO = Find obsidian>
       {
         '<leader>z',
         function()

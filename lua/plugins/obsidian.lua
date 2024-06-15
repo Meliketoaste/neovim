@@ -17,6 +17,11 @@ return {
     -- see below for full list of optional dependencies 👇
   },
   opts = {
+    templates = {
+      subdir = '99 - Meta/00 - Templates/',
+      date_format = '%Y-%m-%d',
+      time_format = '%H:%M',
+    },
     workspaces = {
       {
         name = 'personal',
@@ -26,6 +31,16 @@ return {
 
     -- see below for full list of options 👇
   },
+  keys = {
+    { '<LocalLeader>foq', '<Cmd>ObsidianQuickSwitch<CR>' },
+    { '<LocalLeader>foo', '<Cmd>ObsidianOpen<CR>' },
+    { '<LocalLeader>fot', '<Cmd>ObsidianToday<CR>' },
+    { '<LocalLeader>foT', '<Cmd>ObsidianTomorrow<CR>' },
+    { '<LocalLeader>fos', '<Cmd>ObsidianSearch<CR>' },
+
+    { '<LocalLeader>fob', '<Cmd>ObsidianSearch<CR>' },
+  },
+
   -- Alternatively - and for backwards compatibility - you can set 'dir' to a single path instead of
   -- 'workspaces'. For example:
   -- dir = "~/vaults/work",
@@ -37,23 +52,23 @@ return {
   -- levels defined by "vim.log.levels.*".
   log_level = vim.log.levels.INFO,
 
-  daily_notes = {
-    -- Optional, if you keep daily notes in a separate directory.
-    folder = 'notes/dailies',
-    -- Optional, if you want to change the date format for the ID of daily notes.
-    date_format = '%Y-%m-%d',
-    -- Optional, if you want to change the date format of the default alias of daily notes.
-    alias_format = '%B %-d, %Y',
-    -- Optional, if you want to automatically insert a template from your template directory like 'daily.md'
-    template = nil,
-  },
+  --daily_notes = {
+  --  -- Optional, if you keep daily notes in a separate directory.
+  --  folder = 'notes/dailies',
+  --  -- Optional, if you want to change the date format for the ID of daily notes.
+  --  date_format = '%Y-%m-%d',
+  --  -- Optional, if you want to change the date format of the default alias of daily notes.
+  --  alias_format = '%B %-d, %Y',
+  --  -- Optional, if you want to automatically insert a template from your template directory like 'daily.md'
+  --  template = nil,
+  --},
 
   -- Optional, completion of wiki links, local markdown links, and tags using nvim-cmp.
   completion = {
     -- Set to false to disable completion.
     nvim_cmp = true,
     -- Trigger completion at 2 chars.
-    min_chars = 2,
+    min_chars = 1,
   },
 
   -- Optional, configure key mappings. These are the defaults. If you don't want to set any keymappings this
@@ -167,13 +182,6 @@ return {
   end,
 
   -- Optional, for templates (see below).
-  templates = {
-    folder = 'templates',
-    date_format = '%Y-%m-%d',
-    time_format = '%H:%M',
-    -- A map for custom variables, the key should be the variable and the value a function
-    substitutions = {},
-  },
 
   -- Optional, by default when you use `:ObsidianFollowLink` on a link to an external
   -- URL it will be ignored but you can customize this behavior here.
