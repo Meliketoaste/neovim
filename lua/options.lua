@@ -1,7 +1,7 @@
 -- Disable Mouse
-vim.cmd [[
-    set mouse=
-]]
+--vim.cmd [[
+--    set mouse=
+--]]
 
 vim.cmd [[set undodir=~/.cache/vim/undodir]]
 
@@ -31,6 +31,17 @@ vim.opt.clipboard = 'unnamedplus'
 vim.opt.spelllang = 'en_us'
 vim.opt.spell = true
 vim.o.conceallevel = 2
+vim.opt.listchars = {
+  eol = '↲',
+  tab = '|->',
+  lead = ' ',
+  space = ' ',
+  trail = '•',
+  extends = '→',
+  precedes = '←',
+  nbsp = '+',
+}
+vim.opt.list = true
 
 -- Neovide
 if vim.g.neovide then

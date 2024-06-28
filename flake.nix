@@ -40,7 +40,6 @@
             wrapperArgs =
               [ "--prefix" "PATH" ":" "${lib.makeBinPath runtimeDeps}"
                 ];
-            extraWrapperArgs =  ''--prefix LD_LIBRARY_PATH : "${pkgs.lib.makeLibraryPath [ pkgs.libgit2 ]}"'';
               
           });
       in {
@@ -55,6 +54,12 @@
         };
 
         devShells.default =
-          pkgs.mkShell { nativeBuildInputs = [ pkgs.stylua ]; };
+          pkgs.mkShell { 
+            nativeBuildInputs = [ pkgs.stylua ];
+            LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [pkgs.libgit2];
+
+
+          };
+
       });
 }

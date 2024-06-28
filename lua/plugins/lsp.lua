@@ -113,7 +113,11 @@ return {
       group = vim.api.nvim_create_augroup('CmpSourceCargo', { clear = true }),
       pattern = 'Cargo.toml',
       callback = function()
-        cmp.setup.buffer { sources = { { name = 'crates' } } }
+        cmp.setup.buffer {
+          sources = {
+            { name = 'crates' },
+          },
+        }
       end,
     })
 
@@ -158,6 +162,9 @@ return {
           winhighlight = 'Normal:CmpNormal,FloatBorder:FloatBorder,CursorLine:CursorLineBG,Search:None', -- BorderBG|FloatBorder
           side_padding = 2, -- * NOT WORKING
         },
+      },
+      sources = {
+        { name = 'buffer', keyword_length = 0 },
       },
       formatting = {
         format = lspkind.cmp_format {
