@@ -29,7 +29,7 @@ vim.opt.isfname:append '@-@'
 vim.opt.updatetime = 50
 vim.opt.clipboard = 'unnamedplus'
 vim.opt.spelllang = 'en_us'
-vim.opt.spell = true
+vim.opt.spell = false
 vim.o.conceallevel = 2
 vim.opt.listchars = {
   eol = '↲',
