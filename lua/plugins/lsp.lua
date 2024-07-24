@@ -88,7 +88,7 @@ return {
       settings = {
         ['nil'] = {
           nix = {
-            maxMemoryMB = 7680,
+            maxMemoryMB = 3840,
             flake = {
               autoArchive = true,
               autoEvalInputs = true,
@@ -97,6 +97,7 @@ return {
         },
       },
     }
+    require('lspconfig').rust_analyzer.setup {}
 
     --lsp.on_attach(function(client, _)
     --  require('lsp-format').on_attach(client)
@@ -139,53 +140,52 @@ return {
     lspkind.init {}
 
     cmp.setup {
+      sources = {
+        { name = 'nvim_lsp' },
+        { name = 'cody' },
+        { name = 'path' },
+        { name = 'buffer' },
+      },
       mapping = {
-        ['<Tab>'] = cmp_action.luasnip_supertab(),
-        ['<S-Tab>'] = cmp_action.luasnip_shift_supertab(),
+        ['<C-n>'] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert },
+        ['<C-p>'] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
+        ['<C-y>'] = cmp.mapping(
+          cmp.mapping.confirm {
+            behavior = cmp.ConfirmBehavior.Insert,
+            select = true,
+          },
+          { 'i', 'c' }
+        ),
       },
       window = {
         completion = {
-          border = 'none', -- single|rounded|none
-          -- custom colors
-          --winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:CursorLineBG,Search:None", -- BorderBG|FloatBorder
-          --side_padding = settings.cmp_style == "default" and 1 or 0, -- padding at sides
-          --col_offset = settings.cmp_style == "default" and -1 or -4, -- move floating box left or right
 
-          winhighlight = 'Normal:CmpNormal,FloatBorder:Pmenu,Search:None,CursorLine:CmpBg',
-          col_offset = 1,
+          winhighlight = 'Normal:Pmenu,FloatBorder:Pmenu,Search:None',
+          col_offset = -3,
           side_padding = 0,
         },
-
         documentation = {
           border = 'none', -- single|rounded|none
           -- custom colors
-          winhighlight = 'Normal:CmpNormal,FloatBorder:FloatBorder,CursorLine:CursorLineBG,Search:None', -- BorderBG|FloatBorder
-          side_padding = 2, -- * NOT WORKING
+          --winhighlight = 'Normal:CmpNormal,FloatBorder:FloatBorder,CursorLine:CursorLineBG,Search:None', -- BorderBG|FloatBorder
+          winhighlight = 'Normal:Pmenu,FloatBorder:Pmenu,Search:None',
+          --side_padding = 2, -- * NOT WORKING
         },
-      },
-      sources = {
-        { name = 'buffer', keyword_length = 0 },
       },
       formatting = {
-        format = lspkind.cmp_format {
-          mode = 'symbol_text',
-          menu = {
-            nvim_lsp = '',
-            ultisnips = '[US]',
-            nvim_lua = '[Lua]',
-            path = '[Path]',
-            buffer = '[Buffer]',
-            emoji = '[Emoji]',
-            omni = '[Omni]',
-          },
-        },
-      },
-      experimental = {
-        ghost_text = true,
+        fields = { 'kind', 'abbr', 'menu' },
+        format = function(entry, vim_item)
+          local kind = require('lspkind').cmp_format { mode = 'symbol_text', maxwidth = 50 }(entry, vim_item)
+          local strings = vim.split(kind.kind, '%s', { trimempty = true })
+          kind.kind = ' ' .. (strings[1] or '') .. ' '
+          kind.menu = '    (' .. (strings[2] or '') .. ')'
+
+          return kind
+        end,
       },
     }
-
     vim.opt.signcolumn = 'yes' -- Disable lsp signals shifting buffer
+    --vim.opt.completeopt = 'menuone,noinsert,noselect'
 
     vim.diagnostic.config {
       virtual_text = true,

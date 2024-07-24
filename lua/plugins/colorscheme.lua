@@ -190,6 +190,7 @@ return {
             --TroubleNormal = { bg = "" },
             --MasonNormal = { bg = "#050517" },
             NormalFloat = { bg = C.base },
+            FloatBorder = { bg = C.base },
             Normal = { bg = '#0e0e16' },
             -- htmlBold = { fg = "rose" },
             -- markdownBold = { fg = "rose" },
